@@ -38,6 +38,16 @@ body a:hover{
 	text-decoration:none;
 }
 	/*sidebar navigation*/
+span.fa-thumb-stylink.fa.fa-thumbs-down {
+    font-size: 28px;
+    color: red;
+}
+
+span.fa-thumb-stylink.fa.fa-thumbs-up {
+    font-size: 28px;
+    color: green;
+}
+
 #sidebar {
     width:240px;
     height:100%;
