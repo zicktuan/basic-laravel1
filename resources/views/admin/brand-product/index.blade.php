@@ -3,7 +3,7 @@
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Danh sách danh mục sản phẩm
+                Danh sách thương hiệu sản phẩm
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
@@ -35,29 +35,29 @@
                                 <input type="checkbox"><i></i>
                             </label>
                         </th>
-                        <th>Tên danh mục</th>
+                        <th>Tên thương hiệu</th>
                         <th>Hiển thị</th>
                         <th style="width:100px;"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if(!empty($catProducts))
-                        @foreach($catProducts as $item)
+                    @if(!empty($brandProducts))
+                        @foreach($brandProducts as $item)
                             <tr>
                                 <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-                                <td>{{$item->cat_name}}</td>
+                                <td>{{$item->brand_name}}</td>
                                 <td>
-                                    @if(0 == $item->cat_status)
-                                        <a href="{{route('categories-product.active', ['id'=>$item->cat_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-down"></span></a>
+                                    @if(0 == $item->brand_status)
+                                        <a href="{{route('brand-product.active', ['id' => $item->brand_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-down"></span></a>
                                     @else
-                                        <a href="{{route('categories-product.unactive', ['id'=>$item->cat_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-up"></span></a>
+                                        <a href="{{route('brand-product.unactive', ['id' => $item->brand_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-up"></span></a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('categories-product.edit', ['id' => $item->cat_id])}}" class="active">
+                                    <a href="{{route('brand-product.edit', ['id' => $item->brand_id ])}}" class="active">
                                         <i class="fa fa-pencil-square-o text-success text-active"></i>
                                     </a>
-                                    <a onClick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')" href="{{route('categories-product.delete', ['id' => $item->cat_id])}}" class="active">
+                                    <a onClick="return confirm('Bạn có chắc chắn muốn xóa thương hiệu này?')" href="{{route('brand-product.delete', ['id' => $item->brand_id])}}" class="active">
                                         <i class="fa fa-times text-danger text"></i>
                                     </a>
                                 </td>
@@ -69,16 +69,10 @@
             </div>
             <footer class="panel-footer">
                 <div class="row">
-                    <div class="col-sm-12 text-right text-center-xs">
 
+                    <div class="col-sm-12 text-right text-center-xs">
                         <ul class="pagination pagination-sm m-t-none m-b-none">
-                            {{$catProducts->links()}}
-                            {{--<li><a href=""><i class="fa fa-chevron-left"></i></a></li>--}}
-                            {{--<li><a href="">1</a></li>--}}
-                            {{--<li><a href="">2</a></li>--}}
-                            {{--<li><a href="">3</a></li>--}}
-                            {{--<li><a href="">4</a></li>--}}
-                            {{--<li><a href=""><i class="fa fa-chevron-right"></i></a></li>--}}
+                            {{ $brandProducts->links() }}
                         </ul>
                     </div>
                 </div>

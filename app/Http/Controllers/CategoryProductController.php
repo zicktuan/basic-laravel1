@@ -55,12 +55,12 @@ class CategoryProductController extends Controller
 
 
     public function unactive($id) {
-        $this->categoryProduct->where('cat_id', $id)->update(['cat_status' => 1]);
+        $this->categoryProduct->where('cat_id', $id)->update(['cat_status' => 0]);
         return redirect()->route('categories-product.index');
     }
 
     public function active($id) {
-        $this->categoryProduct->where('cat_id', $id)->update(['cat_status' => 0]);
+        $this->categoryProduct->where('cat_id', $id)->update(['cat_status' => 1]);
         return redirect()->route('categories-product.index');
     }
 }

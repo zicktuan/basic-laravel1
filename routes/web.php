@@ -20,8 +20,9 @@ Route::get('/trang-chu', 'HomeController@index');
 //Backend
 Route::get('/admin', 'AdminController@index');
 Route::get('/login', 'AdminController@index');
-Route::get('/dashboard', 'AdminController@showDashboard')->name('admin.dashboard');
 Route::post('/admin', 'AdminController@dashboard')->name('admin.login');
+
+Route::get('/dashboard', 'AdminController@showDashboard')->name('admin.dashboard');
 Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 
 
@@ -83,26 +84,83 @@ Route::prefix('brand-product')->group(function() {
         'uses' => 'BrandProductController@create'
     ]);
 
-//    Route::post('/store', [
-//        'as' => 'categories-product.store',
-//        'uses' => 'BrandProductController@store'
-//    ]);
-//
-//    Route::get('/edit/{id}', [
-//        'as' => 'categories-product.edit',
-//        'uses' => 'BrandProductController@edit'
-//    ]);
-//
-//    Route::post('/update/{id}', [
-//        'as' => 'categories-product.update',
-//        'uses' => 'BrandProductController@update'
-//    ]);
-//
-//    Route::get('/delete/{id}', [
-//        'as' => 'categories-product.delete',
-//        'uses' => 'BrandProductController@delete'
-//    ]);
+    Route::post('/store', [
+        'as' => 'brand-product.store',
+        'uses' => 'BrandProductController@store'
+    ]);
+
+    Route::get('/edit/{id}', [
+        'as' => 'brand-product.edit',
+        'uses' => 'BrandProductController@edit'
+    ]);
+
+    Route::post('/update/{id}', [
+        'as' => 'brand-product.update',
+        'uses' => 'BrandProductController@update'
+    ]);
+
+    Route::get('/delete/{id}', [
+        'as' => 'brand-product.delete',
+        'uses' => 'BrandProductController@delete'
+    ]);
 
 
 
+    Route::get('/unactive/{id}', [
+        'as' => 'brand-product.unactive',
+        'uses' => 'BrandProductController@unactive'
+    ]);
+
+    Route::get('/active/{id}', [
+        'as' => 'brand-product.active',
+        'uses' => 'BrandProductController@active'
+    ]);
+
+});
+
+
+// product
+Route::prefix('products')->group(function () {
+    Route::get('/', [
+        'as' => 'products.index',
+        'uses' => 'ProductController@index'
+    ]);
+
+    Route::get('/create', [
+        'as' => 'products.create',
+        'uses' => 'ProductController@create'
+    ]);
+
+    Route::post('/store', [
+        'as' => 'products.store',
+        'uses' => 'ProductController@store'
+    ]);
+
+    Route::get('/edit/{id}', [
+        'as' => 'products.edit',
+        'uses' => 'ProductController@edit'
+    ]);
+
+    Route::post('/update/{id}', [
+        'as' => 'products.update',
+        'uses' => 'ProductController@update'
+    ]);
+
+    Route::get('/delete/{id}', [
+        'as' => 'products.delete',
+        'uses' => 'ProductController@delete'
+    ]);
+
+
+
+
+    Route::get('/unactive/{id}', [
+        'as' => 'products.unactive',
+        'uses' => 'ProductController@unactive'
+    ]);
+
+    Route::get('/active/{id}', [
+        'as' => 'products.active',
+        'uses' => 'ProductController@active'
+    ]);
 });

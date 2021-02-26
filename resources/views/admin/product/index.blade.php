@@ -3,7 +3,7 @@
     <div class="table-agile-info">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Danh sách danh mục sản phẩm
+                Danh sách sản phẩm
             </div>
             <div class="row w3-res-tb">
                 <div class="col-sm-5 m-b-xs">
@@ -35,29 +35,38 @@
                                 <input type="checkbox"><i></i>
                             </label>
                         </th>
-                        <th>Tên danh mục</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Giá</th>
+                        <th>Danh mục</th>
+                        <th>Thương hiệu</th>
                         <th>Hiển thị</th>
                         <th style="width:100px;"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    @if(!empty($catProducts))
-                        @foreach($catProducts as $item)
+                    @if(!empty($products))
+                        @foreach($products as $product)
                             <tr>
                                 <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-                                <td>{{$item->cat_name}}</td>
+                                <td>{{$product->product_name}}</td>
+                                <td><img src="{{asset('public/uploads/products/'.$product->product_image)}}" height="100" width="100" alt=""></td>
+                                <td>{{$product->product_price}}</td>
+                                <td>{{$product->cat_name}}</td>
+                                <td>{{$product->brand_name}}</td>
+
                                 <td>
-                                    @if(0 == $item->cat_status)
-                                        <a href="{{route('categories-product.active', ['id'=>$item->cat_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-down"></span></a>
+                                    @if(0 == $product->product_status)
+                                        <a href="{{route('products.active', ['id'=>$product->product_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-down"></span></a>
                                     @else
-                                        <a href="{{route('categories-product.unactive', ['id'=>$item->cat_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-up"></span></a>
+                                        <a href="{{route('products.unactive', ['id'=>$product->product_id])}}"><span class="fa-thumb-stylink fa fa-thumbs-up"></span></a>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('categories-product.edit', ['id' => $item->cat_id])}}" class="active">
+                                    <a href="{{route('products.edit', ['id' => $product->product_id])}}" class="active">
                                         <i class="fa fa-pencil-square-o text-success text-active"></i>
                                     </a>
-                                    <a onClick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')" href="{{route('categories-product.delete', ['id' => $item->cat_id])}}" class="active">
+                                    <a onClick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?')" href="{{route('products.delete', ['id' => $product->product_id])}}" class="active">
                                         <i class="fa fa-times text-danger text"></i>
                                     </a>
                                 </td>
@@ -72,13 +81,7 @@
                     <div class="col-sm-12 text-right text-center-xs">
 
                         <ul class="pagination pagination-sm m-t-none m-b-none">
-                            {{$catProducts->links()}}
-                            {{--<li><a href=""><i class="fa fa-chevron-left"></i></a></li>--}}
-                            {{--<li><a href="">1</a></li>--}}
-                            {{--<li><a href="">2</a></li>--}}
-                            {{--<li><a href="">3</a></li>--}}
-                            {{--<li><a href="">4</a></li>--}}
-                            {{--<li><a href=""><i class="fa fa-chevron-right"></i></a></li>--}}
+                            {{$products->links()}}
                         </ul>
                     </div>
                 </div>
