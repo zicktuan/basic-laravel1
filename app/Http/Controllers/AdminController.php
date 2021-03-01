@@ -8,11 +8,22 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
+    public function AuthLogin() {
+        $adminId = Session::get('admin_id');
+        if ($adminId) {
+            return redirect()->to('dashboard');
+        } else {
+            return redirect()->to('admin')->send();
+        }
+
+    }
+
     public function index() {
         return view('loginAdmin');
     }
 
     public function showDashboard() {
+        $this->AuthLogin();
         return view('admin.dashboard');
     }
 
@@ -35,6 +46,7 @@ class AdminController extends Controller
     }
 
     public function logout() {
+        $this->AuthLogin();
         Session::put('admin_name', null);
         Session::put('admin_id', null);
         return redirect('admin');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -16,7 +17,18 @@ class ProductController extends Controller
         $this->product = $product;
     }
 
+    public function AuthLogin() {
+        $adminId = Session::get('admin_id');
+        if ($adminId) {
+            return redirect()->to('dashboard');
+        } else {
+            return redirect()->to('admin')->send();
+        }
+
+    }
+
     public function index() {
+        $this->AuthLogin();
         $products = DB::table('products')
             ->join('category_products', 'products.cat_id', '=', 'category_products.cat_id')
             ->join('brand_products', 'products.brand_id', '=', 'brand_products.brand_id')
@@ -27,12 +39,14 @@ class ProductController extends Controller
     }
 
     public function create() {
+        $this->AuthLogin();
         $categories = DB::table('category_products')->get();
         $brands = DB::table('brand_products')->get();
         return view('admin.product.add', compact('categories', 'brands'));
     }
 
     public function store(Request $request) {
+        $this->AuthLogin();
         $rules = [
             'product_name' => 'required',
             'product_price' => 'required',
@@ -69,6 +83,7 @@ class ProductController extends Controller
 
 
     public function edit($id) {
+        $this->AuthLogin();
         $product = DB::table('products')->where('product_id', $id)->first();
         $categories = DB::table('category_products')->get();
         $brands = DB::table('brand_products')->get();
@@ -76,6 +91,7 @@ class ProductController extends Controller
     }
 
     public function update($id, Request $request) {
+        $this->AuthLogin();
         $getImage = $request->file('product_image');
 
         if ($getImage) {
@@ -99,17 +115,20 @@ class ProductController extends Controller
 
 
     public function delete($id) {
+        $this->AuthLogin();
+        DB::table('products')->where('product_id', $id)->delete();
+        return redirect()->route('products.index');
     }
 
 
-
-
     public function unactive($id) {
+        $this->AuthLogin();
         $this->product->where('product_id', $id)->update(['product_status' => 0]);
         return redirect()->route('products.index');
     }
 
     public function active($id) {
+        $this->AuthLogin();
         $this->product->where('product_id', $id)->update(['product_status' => 1]);
         return redirect()->route('products.index');
     }

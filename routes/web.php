@@ -16,6 +16,38 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 
+Route::get('category/{id}', 'Frontend\CategoryProductController@index')->name('cat-product-frontend.index');
+Route::get('brand/{id}', 'Frontend\BrandProductController@index')->name('brand-product-frontend.index');
+
+Route::get('product-detail/{id}', 'Frontend\ProductController@detail')->name('product-detail-frontend.index');
+
+Route::prefix('cart')->group(function() {
+    Route::get('/index', [
+        'as' => 'cart.index',
+        'uses' => 'Frontend\CartController@index'
+    ]);
+
+    Route::post('/save', [
+        'as' => 'cart.save',
+        'uses' => 'Frontend\CartController@save'
+    ]);
+
+    Route::get('/delete/{id}', [
+        'as' => 'cart.delete',
+        'uses' => 'Frontend\CartController@delete'
+    ]);
+
+    Route::post('/update/{id}', [
+        'as' => 'cart.update',
+        'uses' => 'Frontend\CartController@update'
+    ]);
+});
+
+Route::get('/login-checkout', 'Frontend\CheckoutController@login')->name('checkout.login');
+Route::post('/add-customer', 'Frontend\CheckoutController@addCustomer')->name('checkout.add');
+
+
+
 
 //Backend
 Route::get('/admin', 'AdminController@index');
@@ -150,8 +182,6 @@ Route::prefix('products')->group(function () {
         'as' => 'products.delete',
         'uses' => 'ProductController@delete'
     ]);
-
-
 
 
     Route::get('/unactive/{id}', [
