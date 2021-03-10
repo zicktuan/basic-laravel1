@@ -21,6 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="{{asset('public/backend/css/morris.css')}}" type="text/css"/>
     <!-- calendar -->
     <link rel="stylesheet" href="{{asset('public/backend/css/monthly.css')}}">
+@yield('css')
     <!-- //calendar -->
     <!-- //font-awesome icons -->
     <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
@@ -116,15 +117,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="{{route('products.create')}}">Thêm sản phẩm</a></li>
                         </ul>
                     </li>
+
                     <li class="sub-menu">
                         <a href="javascript:;">
-                            <i class="fa fa-tasks"></i>
-                            <span>Form Components</span>
+                            <i class="fa fa-book"></i>
+                            <span>Page</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="form_component.html">Form Elements</a></li>
-                            <li><a href="form_validation.html">Form Validation</a></li>
-                            <li><a href="dropzone.html">Dropzone</a></li>
+                            <li><a href="{{route('page.manage')}}">Quản lí page</a></li>
+                            <li><a href="{{route('page.create')}}">Add Page</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Category</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{route('category.manage')}}">Manage</a></li>
+                            <li><a href="{{route('category.create')}}">Add category</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-book"></i>
+                            <span>Menus</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="{{route('menu.manage')}}">Manage</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -203,6 +223,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
 <!-- morris JavaScript -->
+@yield('js')
 <script>
     $(document).ready(function() {
         //BOX BUTTON SHOW AND CLOSE
